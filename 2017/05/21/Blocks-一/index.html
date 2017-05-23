@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/05/21/Blocks-一/index.html">
 <meta property="og:site_name" content="YGben">
 <meta property="og:description" content="Blocks 基本用法时至今日，发现“总结”二字至关重要。Blocks司空见惯，意外参考到 一篇博文,决定分为 Blocks基本用法,Blocks的理解，Blocks的实现 三方面 进行总结。">
-<meta property="og:updated_time" content="2017-05-21T14:31:39.000Z">
+<meta property="og:updated_time" content="2017-05-23T12:06:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Blocks(一)">
 <meta name="twitter:description" content="Blocks 基本用法时至今日，发现“总结”二字至关重要。Blocks司空见惯，意外参考到 一篇博文,决定分为 Blocks基本用法,Blocks的理解，Blocks的实现 三方面 进行总结。">
@@ -329,7 +329,8 @@
       
 
       
-        <h2 id="Blocks-基本用法"><a href="#Blocks-基本用法" class="headerlink" title="Blocks 基本用法"></a>Blocks 基本用法</h2><p>时至今日，发现“总结”二字至关重要。Blocks司空见惯，意外参考到 <a href="http://fuckingblocksyntax.com/" target="_blank" rel="external">一篇博文</a>,决定分为 Blocks基本用法,Blocks的理解，Blocks的实现 三方面 进行总结。<br><a id="more"></a></p>
+        <hr>
+<h2 id="Blocks-基本用法"><a href="#Blocks-基本用法" class="headerlink" title="Blocks 基本用法"></a>Blocks 基本用法</h2><p>时至今日，发现“总结”二字至关重要。Blocks司空见惯，意外参考到 <a href="http://fuckingblocksyntax.com/" target="_blank" rel="external">一篇博文</a>,决定分为 Blocks基本用法,Blocks的理解，Blocks的实现 三方面 进行总结。<br><a id="more"></a></p>
 <h3 id="1-用作局部变量"><a href="#1-用作局部变量" class="headerlink" title="1.用作局部变量"></a>1.用作局部变量</h3><p>returnType (^blockName)(parameterTypes) = ^returnType(parameters) {…};<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> (^changeBlock)(<span class="built_in">NSString</span> *) = ^<span class="keyword">void</span>(<span class="built_in">NSString</span> *)&#123;&#125;;</div><div class="line">或者 ^ (<span class="built_in">NSString</span> *)&#123;&#125;</div></pre></td></tr></table></figure></p>
 <h3 id="2-用作属性"><a href="#2-用作属性" class="headerlink" title="2.用作属性"></a>2.用作属性</h3><p>@property (nonatomic, copy, nullability) returnType (^blockName)(parameterTypes);</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="keyword">void</span> (^changeBlock)(<span class="built_in">NSString</span> *);</div></pre></td></tr></table></figure>
@@ -389,6 +390,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/23/Block-二/" rel="prev" title="Block(二)">
+                Block(二) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -456,7 +461,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
