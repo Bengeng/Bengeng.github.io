@@ -1,0 +1,704 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS基础," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="关联对象Objective-C Runtime 一直是OC语言中很重要的特性。当初刚开始学习的时候，就知道 OC = C + Runtime 的说法，但一直没机会用Runtime。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Associated Object">
+<meta property="og:url" content="http://yoursite.com/2017/05/25/Associated-Object/index.html">
+<meta property="og:site_name" content="YGben">
+<meta property="og:description" content="关联对象Objective-C Runtime 一直是OC语言中很重要的特性。当初刚开始学习的时候，就知道 OC = C + Runtime 的说法，但一直没机会用Runtime。">
+<meta property="og:updated_time" content="2017-05-25T10:40:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Associated Object">
+<meta name="twitter:description" content="关联对象Objective-C Runtime 一直是OC语言中很重要的特性。当初刚开始学习的时候，就知道 OC = C + Runtime 的说法，但一直没机会用Runtime。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/25/Associated-Object/"/>
+
+
+
+
+
+  <title> Associated Object | YGben </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">YGben</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">不像程序猿的程序猿</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/25/Associated-Object/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="YGben">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="YGben">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="YGben" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Associated Object
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-25T18:21:40+08:00">
+                2017-05-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<h2 id="关联对象"><a href="#关联对象" class="headerlink" title="关联对象"></a>关联对象</h2><p>Objective-C Runtime 一直是OC语言中很重要的特性。当初刚开始学习的时候，就知道 OC = C + Runtime 的说法，但一直没机会用Runtime。<br><a id="more"></a></p>
+<p>偶然看到官方文档这样一段话:</p>
+<blockquote>
+<p>Objective-C is more than just a language that is compiled down to machine code. Instead, it requires a runtime system in place to execute that code.</p>
+</blockquote>
+<p>可见Runtime的重要。</p>
+<p>基本的对象调用，前段时间被禁止的热更新框架 JPATCH 都基于Runtime提供的支持。很多东西要学习总结啊，这篇从Associated Objects说起。以后有关Runtime，遇到一个总结一个。</p>
+<h3 id="1-Runtime的资料"><a href="#1-Runtime的资料" class="headerlink" title="1. Runtime的资料"></a>1. Runtime的资料</h3><ul>
+<li><p>阅读<a href="https://developer.apple.com/reference/objectivec/objective_c_runtime" target="_blank" rel="external">官方文档</a>，文中开头：</p>
+<blockquote>
+<p>  The Objective-C runtime is a runtime library that provides support for the dynamic properties of the Objective-C language, and as such is linked to by all Objective-C apps. </p>
+</blockquote>
+<p>Runtime 的存在让OC语言有了”动态特性”的法力。</p>
+</li>
+<li><p>文档中介绍了库中功能函数。本篇详细看<code>Associative References</code></p>
+</li>
+</ul>
+<blockquote>
+<p>func objc_setAssociatedObject(Any!, UnsafeRawPointer!, Any!, objc_AssociationPolicy)</p>
+</blockquote>
+<p>Sets an associated value for a given object using a given key and association policy.</p>
+<blockquote>
+<p>func objc_getAssociatedObject(Any!, UnsafeRawPointer!)</p>
+</blockquote>
+<p>Returns the value associated with a given object for a given key.</p>
+<blockquote>
+<p>func objc_removeAssociatedObjects(Any!)</p>
+</blockquote>
+<p>Removes all associations for a given object.</p>
+<ul>
+<li><p>objc/runtime  源码是<a href="https://opensource.apple.com/source/objc4/" target="_blank" rel="external">开源</a>的, 需要点C++才看的懂。</p>
+</li>
+<li><p>有一篇<code>啸笑天</code>的 <a href="http://justsee.iteye.com/blog/2163777" target="_blank" rel="external">Objective-CRuntime</a>基本介绍了Runtime。没事可以看看。</p>
+</li>
+</ul>
+<h3 id="2-Associated-Object"><a href="#2-Associated-Object" class="headerlink" title="2. Associated Object"></a>2. Associated Object</h3><p>要想 关联对象，<code>#include &lt;objc/runtime.h&gt;</code> 就需要引入runtime。</p>
+<h4 id="代码测试"><a href="#代码测试" class="headerlink" title="代码测试"></a>代码测试</h4><blockquote>
+<p>An associative reference links one object with another, in a similar way to a property or instance variable</p>
+</blockquote>
+<p>简单的例子：<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="keyword">void</span> *overviewKey0 = <span class="string">"overviewKey0"</span>;    </div><div class="line"><span class="comment">//  static void 声明全局静态变量 用作 key</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">void</span> *overviewKey1 = <span class="string">"overviewKey1"</span>;</div><div class="line"></div><div class="line"><span class="built_in">NSArray</span> *array = [[<span class="built_in">NSArray</span> alloc] initWithObjects:<span class="string">@"One"</span>, <span class="string">@"Two"</span>, <span class="string">@"Three"</span>, <span class="literal">nil</span>];</div><div class="line"></div><div class="line"><span class="built_in">NSString</span> * overview0 = [[<span class="built_in">NSString</span> alloc] initWithFormat:<span class="string">@"Four"</span>];</div><div class="line"></div><div class="line"><span class="built_in">NSString</span> * overview1 = [[<span class="built_in">NSString</span> alloc] initWithFormat:<span class="string">@"Three"</span>];</div><div class="line"></div><div class="line"><span class="comment">// 通过key值 和 关联策略 把overview 和array联系起来。</span></div><div class="line">objc_setAssociatedObject(array, overviewKey0, overview0, OBJC_ASSOCIATION_RETAIN);</div><div class="line">objc_setAssociatedObject(array, overviewKey1, overview1, OBJC_ASSOCIATION_RETAIN);</div><div class="line"></div><div class="line"><span class="comment">// 通过key值获取array联系的对象。</span></div><div class="line"><span class="built_in">NSString</span> *associatedObject0 = (<span class="built_in">NSString</span> *)objc_getAssociatedObject(array, overviewKey0);</div><div class="line"><span class="built_in">NSString</span> *associatedObject1 = (<span class="built_in">NSString</span> *)objc_getAssociatedObject(array, overviewKey1);</div><div class="line"></div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"associatedObject0 : %@ \n"</span>, associatedObject0);</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"associatedObject1 : %@ \n"</span>, associatedObject1);</div><div class="line"></div><div class="line"><span class="comment">// 解除联系</span></div><div class="line">objc_removeAssociatedObjects(array);</div><div class="line"></div><div class="line">associatedObject0 = (<span class="built_in">NSString</span> *)objc_getAssociatedObject(array, overviewKey0);</div><div class="line">associatedObject1 = (<span class="built_in">NSString</span> *)objc_getAssociatedObject(array, overviewKey1);</div><div class="line"></div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"associatedObject0 : %@ \n"</span>, associatedObject0);</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"associatedObject1 : %@ \n"</span>, associatedObject1);</div></pre></td></tr></table></figure></p>
+<p>输出结果：<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">associatedObject0 : Four </div><div class="line">associatedObject1 : Three </div><div class="line">associatedObject0 : (null) </div><div class="line">associatedObject1 : (null)</div></pre></td></tr></table></figure></p>
+<ul>
+<li><p>从例子看出<code>objc_removeAssociatedObjects</code>会接触所有对象的关联。不采用。使用 <code>objc_setAssociatedObject(array, overviewKey1, nil, OBJC_ASSOCIATION_RETAIN);</code> 就像API里讲的：</p>
+<blockquote>
+<p>Typically you should use \c objc_setAssociatedObject<br>with a nil value to clear an association.</p>
+</blockquote>
+</li>
+<li><p>key 的数据类型是 (void *) 静态的函数指针。通常使用静态全局变量做键。</p>
+</li>
+</ul>
+<h4 id="经典应用"><a href="#经典应用" class="headerlink" title="经典应用"></a>经典应用</h4><ul>
+<li>AFNetworking/UIKit+AFNetworking/UIImageView+AFNetworking<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="keyword">char</span> kAFImageRequestOperationKey;</div><div class="line"></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">readwrite</span>, <span class="keyword">nonatomic</span>, <span class="keyword">strong</span>, <span class="keyword">setter</span> = af_setImageRequestOperation:) AFHTTPRequestOperation *af_imageRequestOperation;</div><div class="line"></div><div class="line">- (AFHTTPRequestOperation *)af_imageRequestOperation &#123;</div><div class="line"><span class="keyword">return</span> (AFHTTPRequestOperation *)objc_getAssociatedObject(<span class="keyword">self</span>, &amp;kAFImageRequestOperationKey);</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)af_setImageRequestOperation:(AFHTTPRequestOperation *)imageRequestOperation &#123;</div><div class="line">objc_setAssociatedObject(<span class="keyword">self</span>, &amp;kAFImageRequestOperationKey, imageRequestOperation, OBJC_ASSOCIATION_RETAIN_NONATOMIC);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>AFNetworking在 UIImageView 的category上用了关联对象来保持一个operation对象，用于从网络上某URL异步地获取一张图片。</p>
+<ul>
+<li>facebook/KVOController<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="keyword">void</span> *<span class="built_in">NSObjectKVOControllerKey</span> = &amp;<span class="built_in">NSObjectKVOControllerKey</span>;</div><div class="line"></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) FBKVOController *KVOController;</div><div class="line"></div><div class="line">- (FBKVOController *)KVOController</div><div class="line">&#123;</div><div class="line"><span class="keyword">id</span> controller = objc_getAssociatedObject(<span class="keyword">self</span>, <span class="built_in">NSObjectKVOControllerKey</span>);</div><div class="line"></div><div class="line"><span class="comment">// lazily create the KVOController</span></div><div class="line"><span class="keyword">if</span> (<span class="literal">nil</span> == controller) &#123;</div><div class="line">controller = [FBKVOController controllerWithObserver:<span class="keyword">self</span>];</div><div class="line"><span class="keyword">self</span>.KVOController = controller;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">return</span> controller;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)setKVOController:(FBKVOController *)KVOController</div><div class="line">&#123;</div><div class="line">objc_setAssociatedObject(<span class="keyword">self</span>, <span class="built_in">NSObjectKVOControllerKey</span>, KVOController, OBJC_ASSOCIATION_RETAIN_NONATOMIC);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>KVOController 为 NSObject 添加了一个包含 KVOController 方法的 category，关联了KVOController这个“观察对象”。</p>
+<p>###3. 感谢<br>《Effective Objective-C 2.0》第10条；<br>Mattt Thompson撰写、 Croath Liu翻译 <a href="http://nshipster.cn/associated-objects/" target="_blank" rel="external">Associated Objects</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS基础/" rel="tag"># iOS基础</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/23/Block-二/" rel="next" title="Block(二)">
+                <i class="fa fa-chevron-left"></i> Block(二)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="YGben" />
+          <p class="site-author-name" itemprop="name">YGben</p>
+          <p class="site-description motion-element" itemprop="description">专注精神开荒</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关联对象"><span class="nav-number">1.</span> <span class="nav-text">关联对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Runtime的资料"><span class="nav-number">1.1.</span> <span class="nav-text">1. Runtime的资料</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Associated-Object"><span class="nav-number">1.2.</span> <span class="nav-text">2. Associated Object</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码测试"><span class="nav-number">1.2.1.</span> <span class="nav-text">代码测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#经典应用"><span class="nav-number">1.2.2.</span> <span class="nav-text">经典应用</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YGben</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
