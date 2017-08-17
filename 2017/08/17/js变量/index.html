@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS基础," />
+  <meta name="keywords" content="js," />
 
 
 
@@ -84,16 +84,19 @@
 
 
 
-<meta name="description" content="Blocks 基本用法时至今日，发现“总结”二字至关重要。Blocks司空见惯，意外参考到 一篇博文,决定分为 Blocks基本用法,Blocks的理解，Blocks的实现 三方面 进行总结。">
+<meta name="description" content="遇见 js ——解读 变量历经7月加班的冲刷，来到了依旧热的八月。
+最近开始总结js基础点，年后几乎都在用js，所以完全是先实践后总结。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Blocks(一)">
-<meta property="og:url" content="http://yoursite.com/2017/05/21/Block-一/index.html">
+<meta property="og:title" content="js变量">
+<meta property="og:url" content="http://yoursite.com/2017/08/17/js变量/index.html">
 <meta property="og:site_name" content="YGben">
-<meta property="og:description" content="Blocks 基本用法时至今日，发现“总结”二字至关重要。Blocks司空见惯，意外参考到 一篇博文,决定分为 Blocks基本用法,Blocks的理解，Blocks的实现 三方面 进行总结。">
-<meta property="og:updated_time" content="2017-05-24T07:58:34.000Z">
+<meta property="og:description" content="遇见 js ——解读 变量历经7月加班的冲刷，来到了依旧热的八月。
+最近开始总结js基础点，年后几乎都在用js，所以完全是先实践后总结。">
+<meta property="og:updated_time" content="2017-08-17T09:12:34.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Blocks(一)">
-<meta name="twitter:description" content="Blocks 基本用法时至今日，发现“总结”二字至关重要。Blocks司空见惯，意外参考到 一篇博文,决定分为 Blocks基本用法,Blocks的理解，Blocks的实现 三方面 进行总结。">
+<meta name="twitter:title" content="js变量">
+<meta name="twitter:description" content="遇见 js ——解读 变量历经7月加班的冲刷，来到了依旧热的八月。
+最近开始总结js基础点，年后几乎都在用js，所以完全是先实践后总结。">
 
 
 
@@ -121,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/21/Block-一/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/08/17/js变量/"/>
 
 
 
 
 
-  <title> Blocks(一) | YGben </title>
+  <title> js变量 | YGben </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -238,7 +241,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/21/Block-一/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/17/js变量/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="YGben">
@@ -262,7 +265,7 @@
             
             
               
-                Blocks(一)
+                js变量
               
             
           </h1>
@@ -275,8 +278,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-21T22:13:56+08:00">
-                2017-05-21
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-17T17:06:06+08:00">
+                2017-08-17
               </time>
             
 
@@ -294,8 +297,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
+                  <a href="/categories/javaStript/" itemprop="url" rel="index">
+                    <span itemprop="name">javaStript</span>
                   </a>
                 </span>
 
@@ -330,25 +333,46 @@
 
       
         <hr>
-<h2 id="Blocks-基本用法"><a href="#Blocks-基本用法" class="headerlink" title="Blocks 基本用法"></a>Blocks 基本用法</h2><p>时至今日，发现“总结”二字至关重要。Blocks司空见惯，意外参考到 <a href="http://fuckingblocksyntax.com/" target="_blank" rel="external">一篇博文</a>,决定分为 Blocks基本用法,Blocks的理解，Blocks的实现 三方面 进行总结。<br><a id="more"></a></p>
-<h3 id="1-用作局部变量"><a href="#1-用作局部变量" class="headerlink" title="1.用作局部变量"></a>1.用作局部变量</h3><p>returnType (^blockName)(parameterTypes) = ^returnType(parameters) {…};<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> (^changeBlock)(<span class="built_in">NSString</span> *) = ^<span class="keyword">void</span>(<span class="built_in">NSString</span> *)&#123;&#125;;</div><div class="line">或者 ^ (<span class="built_in">NSString</span> *)&#123;&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="2-用作属性"><a href="#2-用作属性" class="headerlink" title="2.用作属性"></a>2.用作属性</h3><p>@property (nonatomic, copy, nullability) returnType (^blockName)(parameterTypes);</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="keyword">void</span> (^changeBlock)(<span class="built_in">NSString</span> *);</div></pre></td></tr></table></figure>
-<h3 id="3-用作方法的参数"><a href="#3-用作方法的参数" class="headerlink" title="3.用作方法的参数"></a>3.用作方法的参数</h3><ul>
-<li>(void)someMethodThatTakesABlock:(returnType (^nullability)(parameterTypes))blockName;</li>
+<h1 id="遇见-js-——解读-变量"><a href="#遇见-js-——解读-变量" class="headerlink" title="遇见 js ——解读 变量"></a>遇见 js ——解读 变量</h1><p>历经7月加班的冲刷，来到了依旧热的八月。</p>
+<p>最近开始总结js基础点，年后几乎都在用js，所以完全是先实践后总结。<br><a id="more"></a></p>
+<p>当我看到下面这段代码结果是 <code>a=1</code>, 一度懵逼，这是什么操作？</p>
+<p>var a = 1;<br>function b() {<br>a = 10;<br>return;<br>function a() {}<br>}<br>b();<br>alert(a);</p>
+<p>细细学习下才知涉及到两个关键点：</p>
+<ol>
+<li>var变量和函数声明提升</li>
+<li>js的变量是松散类型的</li>
+</ol>
+<p><strong>翻译如下</strong></p>
+<p>var a=1;<br>function b(){<br>function a(){};<br>a=10;<br>return;<br>}<br>b();<br>解读： 函数变量声明提升所以 <code>a()</code>方法提升，此时<code>a=10</code>实则是给a函数方法赋值。js变量可以在修改变量值的同时修改值的类型。（ps 弱编程语言就是神奇，随便赋值，函数名居然可以用作变量名）。最后a就取值函数作用域外的值。即<code>a=1</code></p>
+<h3 id="松散型"><a href="#松散型" class="headerlink" title="松散型"></a>松散型</h3><ul>
+<li>变量可以保存任何类型的数据</li>
 </ul>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)setRedirectResponseBlock:(<span class="keyword">nullable</span> <span class="built_in">NSURLRequest</span> * (^)(<span class="built_in">NSURLConnection</span> *connection, <span class="built_in">NSURLRequest</span> *request, <span class="built_in">NSURLResponse</span> *redirectResponse))block;</div></pre></td></tr></table></figure>
-<h3 id="4-用作调用方法的响应"><a href="#4-用作调用方法的响应" class="headerlink" title="4.用作调用方法的响应"></a>4.用作调用方法的响应</h3><p>[someObject someMethodThatTakesABlock:^returnType (parameters) {…}];</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[ShowBtnColor changeBtnColorWithBlock:^(<span class="built_in">UIColor</span> *color) &#123;</div><div class="line">button.backgroundColor = color;</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
-<h3 id="5-用作-typedef"><a href="#5-用作-typedef" class="headerlink" title="5.用作 typedef"></a>5.用作 typedef</h3><p>typedef returnType (^TypeName)(parameterTypes);<br>TypeName blockName = ^returnType(parameters) {…};<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="built_in">NSString</span> *(^SDWebImageCacheKeyFilterBlock)(<span class="built_in">NSURL</span> *url);</div></pre></td></tr></table></figure></p>
-<h3 id="重点来了。。。"><a href="#重点来了。。。" class="headerlink" title="重点来了。。。"></a>重点来了。。。</h3><p>完整的Blocks的语法是： ^ 返回值类型 参数列表 表达式</p>
-<blockquote>
+<p>var o = {<br>a:80,<br>b:function(){<br>return this.a<br>}<br>arr: [“1”,”2”,”3”]<br>}<br>console.info(o.b())<br>函数也可以，知道真相的我眼泪快要掉下来。</p>
 <ul>
-<li>返回值可以不写，因为表达式里如果没有return自然是void类型，有则当有；参数列表在无参数的情况下也可以不写。</li>
-<li>一般会采用typedef简洁Blocks，这样作为 属性 和 方法参数 不显的那样 累赘。</li>
-<li>Block 类型变量可像C语言重的其它类型变量一样使用。用法一中changeBlock就是一个局部变量的Block类型。</li>
+<li>可以在修改变量值的同时修改值的类型（不推荐）</li>
 </ul>
-</blockquote>
+<h3 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h3><ul>
+<li>通过var关键字声明的变量作用域是函数作用域，没有块级作用域。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function  func()&#123;</div><div class="line">if(!true)&#123;</div><div class="line">var a=13;</div><div class="line">&#125;else&#123;</div><div class="line">console.log(&quot;----&quot;+a);</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">func()</div><div class="line">:----undefined</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>var <a href="http://www.cnblogs.com/damonlan/archive/2012/07/01/2553425.html" target="_blank" rel="external">变量提升</a>，作用域在函数func中，而不是if{}中。类似的for循环中<code>i</code>用var{}外还可以访问。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// var 变量提升至函数顶部</div><div class="line">var a;</div><div class="line">if(!true)&#123;</div><div class="line">a=13;</div><div class="line">&#125;else&#123;</div><div class="line">console.log(&quot;----&quot;+a);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><a href="https://leanpub.com/understandinges6/read#leanpub-auto-working-with-integers" target="_blank" rel="external">ES6</a>之前没有块级作用域，直到<code>let const</code>出现<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function  func()&#123;</div><div class="line">if(!true)&#123;</div><div class="line">let a=13;</div><div class="line">&#125;else&#123;</div><div class="line">console.log(&quot;----&quot;+a);</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">func();</div><div class="line">:---ncaught ReferenceError: a is not defined</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><code>let</code>为JS新增了块级作用域，不存在变量提升，不允许重复操作，只在块级中起作用。<br><code>let</code>很方便的解决了没有块级作用域带来的不合理。</p>
+<p>例如：想实现每隔10秒执行一次方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">for(var i=0;i&lt;10;i++)&#123;</div><div class="line">setTimeout(function()&#123;</div><div class="line">console.info(&quot;---&quot;+i)</div><div class="line">&#125;,10);</div><div class="line">&#125;</div><div class="line">:---10(打印10次)</div></pre></td></tr></table></figure></p>
+<p>i 的作用域在for块级中，setTimeout延时function的执行，但是js代码不会同步等着执行，会继续执行直到i=10，最后一次执行10遍console.info(“—“+i)。</p>
+<p>ES6以前可以这样解决：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">for(var i=0;i&lt;10;i++)&#123;</div><div class="line">(function(m)&#123;</div><div class="line">setTimeout(function()&#123;</div><div class="line">console.info(&quot;---&quot;+m)</div><div class="line">&#125;,10);</div><div class="line">&#125;)(i)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>i 传入 m，打印m，自然m只在外层function中起作用，m会保存每一个值，独立的。其实就是努力去创建一个独立的工作空间。可惜没有块级作用域这一说，所以才创建个函数作用域。</p>
+<p>但是有了<code>let</code> 后，一切显得顺利成章。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">for(let i=0;i&lt;10;i++)&#123;</div><div class="line">setTimeout((function()&#123;</div><div class="line">console.info(&quot;---&quot;+i)</div><div class="line">&#125;)(),10);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>唯一的区别就是var改为let，便可实现效果。</p>
+<p>以上只在考虑变量的因素，let和var及变量作用域。</p>
+<p>想实现每隔10秒的执行一次的效果，还需要理解<a href="http://imweb.io/topic/56ac67fbe39ca21162ae6c78" target="_blank" rel="external">setTimeout</a>,当执行最后一段代码时，会发现tong时间打印10条结果，并没有所谓的10秒一隔。</p>
+<p>设定一个10ms 后执行的定时器并不代表这10ms后立即执行，只是表示10ms后被加入到队列中。加入队列中后并不代表立即执行，只能表示尽快执行。因为队列中并不只是你一个任务。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">for(let i=0;i&lt;10;i++)&#123;</div><div class="line">setTimeout(function()&#123;</div><div class="line">console.info(&quot;---&quot;+i)</div><div class="line">&#125;,1000*i);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当然这样写准确地说也是大概时间。</p>
+<p>总结：<br>var变量作用域在函数作用域，存在变量提升。let变量作用域在块级作用域，不会变量提升。</p>
 
       
     </div>
@@ -372,7 +396,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/iOS基础/" rel="tag"># iOS基础</a>
+            <a href="/tags/js/" rel="tag"># js</a>
           
         </div>
       
@@ -381,8 +405,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/08/App支付/" rel="next" title="微信和支付宝App支付">
-                <i class="fa fa-chevron-left"></i> 微信和支付宝App支付
+              <a href="/2017/06/22/WWDC-2017/" rel="next" title="WWDC 2017">
+                <i class="fa fa-chevron-left"></i> WWDC 2017
               </a>
             
           </div>
@@ -390,10 +414,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/23/Block-二/" rel="prev" title="Block(二)">
-                Block(二) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -513,7 +533,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Blocks-基本用法"><span class="nav-number">1.</span> <span class="nav-text">Blocks 基本用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-用作局部变量"><span class="nav-number">1.1.</span> <span class="nav-text">1.用作局部变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-用作属性"><span class="nav-number">1.2.</span> <span class="nav-text">2.用作属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-用作方法的参数"><span class="nav-number">1.3.</span> <span class="nav-text">3.用作方法的参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-用作调用方法的响应"><span class="nav-number">1.4.</span> <span class="nav-text">4.用作调用方法的响应</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-用作-typedef"><span class="nav-number">1.5.</span> <span class="nav-text">5.用作 typedef</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重点来了。。。"><span class="nav-number">1.6.</span> <span class="nav-text">重点来了。。。</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#遇见-js-——解读-变量"><span class="nav-number">1.</span> <span class="nav-text">遇见 js ——解读 变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#松散型"><span class="nav-number">1.0.1.</span> <span class="nav-text">松散型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#块级作用域"><span class="nav-number">1.0.2.</span> <span class="nav-text">块级作用域</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
