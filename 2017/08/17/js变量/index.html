@@ -84,19 +84,22 @@
 
 
 
-<meta name="description" content="遇见 js ——解读 变量历经7月加班的冲刷，来到了依旧热的八月。
-最近开始总结js基础点，年后几乎都在用js，所以完全是先实践后总结。">
+<meta name="description" content="遇见 js ——解读 变量标签（空格分隔）： js
+
+历经7月加班的冲刷，来到了依旧热的八月。最近开始总结js基础点，年后几乎都在用js，所以完全是先实践后总结。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="js变量">
 <meta property="og:url" content="http://yoursite.com/2017/08/17/js变量/index.html">
 <meta property="og:site_name" content="YGben">
-<meta property="og:description" content="遇见 js ——解读 变量历经7月加班的冲刷，来到了依旧热的八月。
-最近开始总结js基础点，年后几乎都在用js，所以完全是先实践后总结。">
-<meta property="og:updated_time" content="2017-08-17T09:12:34.000Z">
+<meta property="og:description" content="遇见 js ——解读 变量标签（空格分隔）： js
+
+历经7月加班的冲刷，来到了依旧热的八月。最近开始总结js基础点，年后几乎都在用js，所以完全是先实践后总结。">
+<meta property="og:updated_time" content="2017-08-17T10:37:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js变量">
-<meta name="twitter:description" content="遇见 js ——解读 变量历经7月加班的冲刷，来到了依旧热的八月。
-最近开始总结js基础点，年后几乎都在用js，所以完全是先实践后总结。">
+<meta name="twitter:description" content="遇见 js ——解读 变量标签（空格分隔）： js
+
+历经7月加班的冲刷，来到了依旧热的八月。最近开始总结js基础点，年后几乎都在用js，所以完全是先实践后总结。">
 
 
 
@@ -333,26 +336,27 @@
 
       
         <hr>
-<h1 id="遇见-js-——解读-变量"><a href="#遇见-js-——解读-变量" class="headerlink" title="遇见 js ——解读 变量"></a>遇见 js ——解读 变量</h1><p>历经7月加班的冲刷，来到了依旧热的八月。</p>
-<p>最近开始总结js基础点，年后几乎都在用js，所以完全是先实践后总结。<br><a id="more"></a></p>
-<p>当我看到下面这段代码结果是 <code>a=1</code>, 一度懵逼，这是什么操作？</p>
-<p>var a = 1;<br>function b() {<br>a = 10;<br>return;<br>function a() {}<br>}<br>b();<br>alert(a);</p>
+<h1 id="遇见-js-——解读-变量"><a href="#遇见-js-——解读-变量" class="headerlink" title="遇见 js ——解读 变量"></a>遇见 js ——解读 变量</h1><p>标签（空格分隔）： js</p>
+<hr>
+<p>历经7月加班的冲刷，来到了依旧热的八月。最近开始总结js基础点，年后几乎都在用js，所以完全是先实践后总结。<br><a id="more"></a></p>
+<p>当我看到下面这段代码结果是 <code>a=1</code>, 一度懵逼，这是什么操作？<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>) </span>&#123;</div><div class="line">a = <span class="number">10</span>;</div><div class="line"><span class="keyword">return</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line">&#125;</div><div class="line">b();</div><div class="line">alert(a);</div></pre></td></tr></table></figure></p>
 <p>细细学习下才知涉及到两个关键点：</p>
 <ol>
 <li>var变量和函数声明提升</li>
-<li>js的变量是松散类型的</li>
+<li>js的变量是松散类型的<br><strong>翻译如下</strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a=<span class="number">1</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>)</span>&#123;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line">a=<span class="number">10</span>;</div><div class="line"><span class="keyword">return</span>;</div><div class="line">&#125;</div><div class="line">b();</div></pre></td></tr></table></figure>
+</li>
 </ol>
-<p><strong>翻译如下</strong></p>
-<p>var a=1;<br>function b(){<br>function a(){};<br>a=10;<br>return;<br>}<br>b();<br>解读： 函数变量声明提升所以 <code>a()</code>方法提升，此时<code>a=10</code>实则是给a函数方法赋值。js变量可以在修改变量值的同时修改值的类型。（ps 弱编程语言就是神奇，随便赋值，函数名居然可以用作变量名）。最后a就取值函数作用域外的值。即<code>a=1</code></p>
+<p>解读： 函数变量声明提升所以 <code>a()</code>方法提升，此时<code>a=10</code>实则是给a函数方法赋值。js变量可以在修改变量值的同时修改值的类型。（ps 弱编程语言就是神奇，随便赋值，函数名居然可以用作变量名）。最后a就取值函数作用域外的值。即<code>a=1</code></p>
 <h3 id="松散型"><a href="#松散型" class="headerlink" title="松散型"></a>松散型</h3><ul>
-<li>变量可以保存任何类型的数据</li>
+<li>变量可以保存任何类型的数据<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o = &#123;</div><div class="line">a:<span class="number">80</span>,</div><div class="line">b:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"><span class="keyword">return</span> <span class="keyword">this</span>.a</div><div class="line">&#125;</div><div class="line">arr: [<span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span>]</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.info(o.b())</div></pre></td></tr></table></figure>
+</li>
 </ul>
-<p>var o = {<br>a:80,<br>b:function(){<br>return this.a<br>}<br>arr: [“1”,”2”,”3”]<br>}<br>console.info(o.b())<br>函数也可以，知道真相的我眼泪快要掉下来。</p>
+<p>函数也可以，知道真相的我眼泪快要掉下来。</p>
 <ul>
 <li>可以在修改变量值的同时修改值的类型（不推荐）</li>
 </ul>
 <h3 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h3><ul>
-<li>通过var关键字声明的变量作用域是函数作用域，没有块级作用域。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function  func()&#123;</div><div class="line">if(!true)&#123;</div><div class="line">var a=13;</div><div class="line">&#125;else&#123;</div><div class="line">console.log(&quot;----&quot;+a);</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">func()</div><div class="line">:----undefined</div></pre></td></tr></table></figure>
+<li>通过var关键字声明的变量作用域是函数作用域，没有块级作用域。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>  <span class="title">func</span>(<span class="params"></span>)</span>&#123;</div><div class="line"><span class="keyword">if</span>(!<span class="literal">true</span>)&#123;</div><div class="line"><span class="keyword">var</span> a=<span class="number">13</span>;</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line"><span class="built_in">console</span>.log(<span class="string">"----"</span>+a);</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">func()</div><div class="line">:----<span class="literal">undefined</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>var <a href="http://www.cnblogs.com/damonlan/archive/2012/07/01/2553425.html" target="_blank" rel="external">变量提升</a>，作用域在函数func中，而不是if{}中。类似的for循环中<code>i</code>用var{}外还可以访问。</p>
