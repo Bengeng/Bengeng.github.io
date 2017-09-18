@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="WWDC," />
+  <meta name="keywords" content="iOS," />
 
 
 
@@ -84,16 +84,20 @@
 
 
 
-<meta name="description" content="撸一遍 WWDC 2017六月，不只是时间。WWDC 2017 如期举行。">
+<meta name="description" content="书到用时方恨少，南方的九月依然炎热，着不住家里小亭的凉风。还好快国庆回家了。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="WWDC 2017">
-<meta property="og:url" content="http://yoursite.com/2017/06/22/WWDC-2017/index.html">
+<meta property="og:title" content="iOS与H5交互">
+<meta property="og:url" content="http://yoursite.com/2017/09/18/JSCore/index.html">
 <meta property="og:site_name" content="YGben">
-<meta property="og:description" content="撸一遍 WWDC 2017六月，不只是时间。WWDC 2017 如期举行。">
-<meta property="og:updated_time" content="2017-06-22T15:09:45.000Z">
+<meta property="og:description" content="书到用时方恨少，南方的九月依然炎热，着不住家里小亭的凉风。还好快国庆回家了。">
+<meta property="og:image" content="https://blog-10039692.file.myqcloud.com/1492484475516_5068_1492484475859.png">
+<meta property="og:image" content="https://blog-10039692.file.myqcloud.com/1492486033041_8675_1492486033267.png">
+<meta property="og:image" content="https://blog-10039692.file.myqcloud.com/1492486061808_9327_1492486062018.png">
+<meta property="og:updated_time" content="2017-09-18T10:30:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="WWDC 2017">
-<meta name="twitter:description" content="撸一遍 WWDC 2017六月，不只是时间。WWDC 2017 如期举行。">
+<meta name="twitter:title" content="iOS与H5交互">
+<meta name="twitter:description" content="书到用时方恨少，南方的九月依然炎热，着不住家里小亭的凉风。还好快国庆回家了。">
+<meta name="twitter:image" content="https://blog-10039692.file.myqcloud.com/1492484475516_5068_1492484475859.png">
 
 
 
@@ -121,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/06/22/WWDC-2017/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/09/18/JSCore/"/>
 
 
 
 
 
-  <title> WWDC 2017 | YGben </title>
+  <title> iOS与H5交互 | YGben </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -238,7 +242,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/22/WWDC-2017/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/18/JSCore/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="YGben">
@@ -262,7 +266,7 @@
             
             
               
-                WWDC 2017
+                iOS与H5交互
               
             
           </h1>
@@ -275,8 +279,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-22T23:06:53+08:00">
-                2017-06-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-18T18:14:08+08:00">
+                2017-09-18
               </time>
             
 
@@ -330,36 +334,75 @@
 
       
         <hr>
-<h1 id="撸一遍-WWDC-2017"><a href="#撸一遍-WWDC-2017" class="headerlink" title="撸一遍 WWDC 2017"></a>撸一遍 WWDC 2017</h1><p>六月，不只是时间。WWDC 2017 如期举行。<br><a id="more"></a></p>
-<p>有必要跟着苹果大大撸一遍看点，以便日后方便学习。</p>
+<p>书到用时方恨少，南方的九月依然炎热，着不住家里小亭的凉风。还好快国庆回家了。<br><a id="more"></a></p>
+<ul>
+<li>目前开发App有 哪些模式</li>
+<li>运用JavaScriptCore框架</li>
+<li>解析JavaScriptCore框架</li>
+</ul>
+<h3 id="常见的五种App开发模式"><a href="#常见的五种App开发模式" class="headerlink" title="常见的五种App开发模式"></a>常见的五种App开发模式</h3><p>这里小小总结下：</p>
+<ol>
+<li>Native App</li>
+<li>Web App （比如 小程序）</li>
+<li>Hybrid App</li>
+<li>Weex（或Vue）</li>
+<li>React Native </li>
+</ol>
+<p>本篇主要是 <code>Hybrid App</code> iOS中 OC与H5 的交互。</p>
+<h3 id="Hybrid-App"><a href="#Hybrid-App" class="headerlink" title="Hybrid App"></a>Hybrid App</h3><p>混合开发就离不了H5与原生的交互，最近项目需求用到js与原生的交互，只不过我开发的H5部分。</p>
+<p>在这里也总结以下交互的解决方式：（从iOS角度）</p>
+<ol>
+<li>运用 UIWebView  （针对iOS7.0以前）</li>
+<li>运用 <a href="https://developer.apple.com/documentation/webkit/wkwebview#//apple_ref/occ/instm/WKWebView/evaluateJavaScript:completionHandler:" target="_blank" rel="external">WKWebView</a>  （iOS8推出，苹果建议iOS8.0使用）</li>
+<li>运用 <a href="https://developer.apple.com/documentation/javascriptcore" target="_blank" rel="external">JavaScriptCore</a> 框架（iOS7.0后）</li>
+<li>运用第三方优秀框架 （例如  @<a href="https://github.com/marcuswestin" target="_blank" rel="external">Marcus Westin</a>开源库 <a href="https://github.com/marcuswestin/WebViewJavascriptBridge" target="_blank" rel="external">WebViewJavascriptBridge</a>）</li>
+</ol>
+<p>前两者方法利用 UIWebView或者WKWebView 的系统方法调用JS方法，iOS7.0前JS调用OC代码，方法名在URL中，截取URL获取方法名，再调用OC的同名方法。WKWebView可以利用协议方法。具体用到可以谷歌。</p>
+<h3 id="JavaScriptCore"><a href="#JavaScriptCore" class="headerlink" title="JavaScriptCore"></a>JavaScriptCore</h3><p>JavaScriptCore 很好的解决了OC和JS的互相调用，不用依托控制器UIWebView或者WKWebView。<br>对于JavaScriptCore的理解，我更想把她理解为嵌入到OC代码中的JS引擎。或许不对，对于JS还不够深入。我也是看了这篇 <a href="http://web.jobbole.com/84351/" target="_blank" rel="external">一篇给小白看的 JavaScript 引擎指南</a>了解,构成 Webkit 实现基础的 JavaScript 引擎就是 JavaScriptCore。还有一篇介绍 <a href="https://www.zybuluo.com/yangfch3/note/671516" target="_blank" rel="external">JS内核和引擎</a><br><strong>主要类：</strong></p>
+<p><code>JSContext</code>: 提供JS的执行环境，简直就是基石本质。所有JS代码执行都依靠JSContext。<br><img src="https://blog-10039692.file.myqcloud.com/1492484475516_5068_1492484475859.png" alt="来源  @殷源 JavaScriptCore全面解析"></p>
+<p><code>JSValue</code>: 注入JS代码中的变量载体，完美转换原生和JS的变量。变量，除了基本数据类型，可以是自定义类或者方法。JSValue 所有实例来源JSContext。</p>
+<p><code>JSManagedValue</code>: 本质上是一个JSValue，但是可以处理内存管理中的一些特殊情形。</p>
+<p>例子：</p>
+<pre><code class="javascript">JSValue *nickName = [JSValue valueWithObject:name inContext:context];
+JSManagedValue *managedValue = [JSManagedValue managedValueWithValue:nickName  andOwner:self];
+context[@<span class="string">"block"</span>] = ^(){
+NSLog(@<span class="string">"nickName:%@\ncurrentContext:%@"</span>,
+[managedValue value],[JSContext currentContext]);
+};
+[context evaluateScript:@<span class="string">"block()"</span>];
+</code></pre>
+<p>JSValue对象 nickName 持有强引用 context，context中注入block，并调用 JSValue对象和 context，互相持有，所以可能产生 循环引用。</p>
+<p><code>JSExport</code>: 协议，可以将原生对象，方法和属性转为JS的变量，简直就是黑魔法。</p>
+<p><code>JSVirtualMachine</code>: 官方解释此类提供JS执行的工作空间。主要两个用途：支持并发JavaScript执行，并管理JavaScript和Objective-C或Swift之间桥接的对象的内存。<br>这句代码<code>JSContext *context = [[JSContext alloc] init];</code> 使用 context.virtualMachine 就可以输出默认创建的JSVirtualMachine。每一个JavaScript上下文（JSContext对象）都归属于一个虚拟机（JSVirtualMachine）。每个虚拟机可以包含多个不同的上下文，并允许在这些不同的上下文之间传值（JSValue对象），但是不允许两个虚拟机之间传旨，因为垃圾回收站(GC)无法处理虚拟机堆中对象。</p>
+<p><strong>基础使用</strong></p>
+<p>具体的使用就不啰嗦了，很多本文的分享链接都有写到。自己写代码敲一遍基本就了解了。</p>
+<ul>
+<li>(JSValue <em>)evaluateScript:(NSString </em>)script;</li>
+</ul>
+<p>执行JS代码。当然调用js代码也可以这样：</p>
+<p>JSValue <em>function = context[@”printHello”];<br>JSValue </em>result = [function callWithArguments:@[@”YGben”]];  </p>
+<p>含义：取出context的方法printHello；执行并传参数“YGben”</p>
+<ul>
+<li>(void)setObject:(id)object forKeyedSubscript:(NSObject <nscopying> *)key;</nscopying></li>
+</ul>
+<p>给JS中代码变量 key 赋值属性 object</p>
 <blockquote>
-<p><a href="https://www.apple.com/apple-events/june-2017/" target="_blank" rel="external">完整视频</a>在这里 没事看一看，还能练英语，哈哈。</p>
+<p>其实JavaScriptCore实现了JS和OC 的互联互通，谁调谁就看业务需求，主要看谁的参数传给谁，谁接受参数处理，如果OC接受参数处理，就是JS调用原生方法。如果JS接受参数处理，就是原生方法调JS。</p>
 </blockquote>
-<p>说说我感兴趣的几个点</p>
-<h2 id="Core-ML"><a href="#Core-ML" class="headerlink" title="Core ML"></a>Core ML</h2><ul>
-<li>阅读<a href="https://developer.apple.com/documentation/coreml" target="_blank" rel="external">官方文档</a><br>个人理解：苹果针对机器学习出款的一款SDK，作用是使机器学习模型融入App里。<br><a href="https://www.tensorflow.org/" target="_blank" rel="external">TensorFlow</a>是Google出品的机器智能开源软件包。<a href="https://bigdata-ny.github.io/2016/08/12/first-contact-with-tensorflow-1/" target="_blank" rel="external">这里</a>一篇写的很好。<br>通俗讲：TensorFlow 是开发机器学习模型的。类似的还有<a href="http://caffe.berkeleyvision.org/" target="_blank" rel="external">caffe</a>,<a href="http://scikit-learn.org/stable/" target="_blank" rel="external">scikit-learn</a>是谷歌之前的机器学习框架。</li>
-</ul>
-<p>苹果控制着终端和iOS系统，拥有Core ML ，就会使App拥有机器学习的“魔力”。</p>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>参考 腾讯 @殷源<a href="https://www.qcloud.com/community/user/571918" target="_blank" rel="external">JavaScriptCore全面解析</a>（下篇）, 总结 JavaScriptCore，大量参考了该文，表示感谢。</p>
+<ol>
+<li>JS调用OC代码两种方式：</li>
+</ol>
 <ul>
-<li>Core ML 支持经过什么样培训的机器模型呢？</li>
-<li>深度神经网络</li>
-<li>循环神经网络</li>
-<li>卷积神经网络</li>
-<li>支持向机量</li>
-<li>树集成 </li>
-<li>线性模型</li>
+<li>Block直接赋值，调用JS命名的方法实质就在调用Block</li>
+<li>遵循JSExport协议</li>
 </ul>
-<p>听过没听过的都支持，看起来挺全。训练的模型可以通过<a href="https://developer.apple.com/documentation/coreml/converting_trained_models_to_core_ml#2880117" target="_blank" rel="external">转化</a>为Core ML model。</p>
-<h2 id="ARKit"><a href="#ARKit" class="headerlink" title="ARKit"></a>ARKit</h2><p>同 Core ML 一样，也是iOS11 新的SDK。</p>
-<ul>
-<li><a href="https://developer.apple.com/documentation/arkit" target="_blank" rel="external">官方文档</a><br>个人理解 ：利用iOS系统自身的相机和手势等开发出的针对<code>增强现实(AR)</code>的SDK。以后可以运用游戏或有需求的App中。这里学习需要<code>2D</code>&amp;&amp;  <code>3D</code>图形图像基础。AR场景的内容可以通过<code>SceneKit</code>&amp;&amp; <code>SpriteKit</code>来创建。最后通过ARkit完成增强现实体验的工作。</li>
-</ul>
-<p>The largest AR platform in the world.</p>
-<h2 id="Vision"><a href="#Vision" class="headerlink" title="Vision"></a>Vision</h2><ul>
-<li><a href="https://developer.apple.com/documentation/vision" target="_blank" rel="external">官方文档</a> 其实这些官方文档网址都在一个目录下。<br>个人理解： Vision 是经过苹果训练的针对人脸识别，图像或视频分类和识别的SDK。简书上 @<code>张嘉夫</code> 翻译了个<a href="http://www.jianshu.com/p/1df8ac6af865" target="_blank" rel="external">例子</a>，可以参考学习，本来这方面资料少，更多要看国外的翻译。</li>
-</ul>
-<p>没有涉及硬件部分，全是iOS11 的新特性。其中UIKit也有部分更新，参考 <a href="http://danny-lau.com/2017/06/12/wwdc2017-cocoa-touch-new/" target="_blank" rel="external">Danny’s Dream</a> </p>
-<p>感谢这些素不相识的博主！</p>
+<ol>
+<li>内存管理  看懂这两张图</li>
+</ol>
+<p><img src="https://blog-10039692.file.myqcloud.com/1492486033041_8675_1492486033267.png" alt="正常持有"><br><img src="https://blog-10039692.file.myqcloud.com/1492486061808_9327_1492486062018.png" alt="如果我们在native对象中强引用持有JSContext或者JSValue，便会造成循环引用"></p>
+<h3 id="参考传送门"><a href="#参考传送门" class="headerlink" title="参考传送门"></a>参考传送门</h3><p>swift版本<a href="http://nshipster.cn/javascriptcore/" target="_blank" rel="external">JavaScriptCore</a><br>gitbook @HJGitBook  有关 JavaScriptCore 的<a href="https://hjgitbook.gitbooks.io/ios/content/04-technical-research/04-javascriptcore-note.html" target="_blank" rel="external">博文</a><br>简书@ 袁峥 的一篇JavaScriptCore用法 的<a href="http://www.jianshu.com/p/bd7dfd8c9917" target="_blank" rel="external">博文</a><br>@ KittenYang <a href="http://kittenyang.com/webview-javascript-bridge/" target="_blank" rel="external">UIWebView与JS的深度交互
+</a></p>
 
       
     </div>
@@ -383,7 +426,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/WWDC/" rel="tag"># WWDC</a>
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
           
         </div>
       
@@ -392,8 +435,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/25/Associated-Object/" rel="next" title="Associated Object">
-                <i class="fa fa-chevron-left"></i> Associated Object
+              <a href="/2017/08/17/js变量/" rel="next" title="js变量">
+                <i class="fa fa-chevron-left"></i> js变量
               </a>
             
           </div>
@@ -401,10 +444,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/17/js变量/" rel="prev" title="js变量">
-                js变量 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -524,7 +563,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#撸一遍-WWDC-2017"><span class="nav-number">1.</span> <span class="nav-text">撸一遍 WWDC 2017</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Core-ML"><span class="nav-number">1.1.</span> <span class="nav-text">Core ML</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ARKit"><span class="nav-number">1.2.</span> <span class="nav-text">ARKit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vision"><span class="nav-number">1.3.</span> <span class="nav-text">Vision</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的五种App开发模式"><span class="nav-number">1.</span> <span class="nav-text">常见的五种App开发模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hybrid-App"><span class="nav-number">2.</span> <span class="nav-text">Hybrid App</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScriptCore"><span class="nav-number">3.</span> <span class="nav-text">JavaScriptCore</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">4.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考传送门"><span class="nav-number">5.</span> <span class="nav-text">参考传送门</span></a></li></ol></div>
             
 
           </div>
