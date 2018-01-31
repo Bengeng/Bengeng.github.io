@@ -1,0 +1,710 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="js," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="遇见 js ——解读 变量历经7月加班的冲刷，来到了依旧热的八月。最近开始总结js基础点，年后几乎都在用js，所以完全是先实践后总结。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js变量">
+<meta property="og:url" content="http://ben92.com.cn/2017/08/17/2017-08-17-js变量/index.html">
+<meta property="og:site_name" content="YGben">
+<meta property="og:description" content="遇见 js ——解读 变量历经7月加班的冲刷，来到了依旧热的八月。最近开始总结js基础点，年后几乎都在用js，所以完全是先实践后总结。">
+<meta property="og:updated_time" content="2017-08-17T10:57:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js变量">
+<meta name="twitter:description" content="遇见 js ——解读 变量历经7月加班的冲刷，来到了依旧热的八月。最近开始总结js基础点，年后几乎都在用js，所以完全是先实践后总结。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://ben92.com.cn/2017/08/17/2017-08-17-js变量/"/>
+
+
+
+
+
+  <title> js变量 | YGben </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">YGben</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">不像程序猿的程序猿</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://ben92.com.cn/2017/08/17/2017-08-17-js变量/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="YGben">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="YGben">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="YGben" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                js变量
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-17T17:06:06+08:00">
+                2017-08-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaStript/" itemprop="url" rel="index">
+                    <span itemprop="name">javaStript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<h1 id="遇见-js-——解读-变量"><a href="#遇见-js-——解读-变量" class="headerlink" title="遇见 js ——解读 变量"></a>遇见 js ——解读 变量</h1><p>历经7月加班的冲刷，来到了依旧热的八月。最近开始总结js基础点，年后几乎都在用js，所以完全是先实践后总结。<br><a id="more"></a></p>
+<p>当我看到下面这段代码结果是 <code>a=1</code>, 一度懵逼，这是什么操作？<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>) </span>&#123;</div><div class="line">a = <span class="number">10</span>;</div><div class="line"><span class="keyword">return</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line">&#125;</div><div class="line">b();</div><div class="line">alert(a);</div></pre></td></tr></table></figure></p>
+<p>细细学习下才知涉及到两个关键点：</p>
+<ol>
+<li>var变量和函数声明提升</li>
+<li>js的变量是松散类型的<br><strong>翻译如下</strong></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a=<span class="number">1</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>)</span>&#123;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line">a=<span class="number">10</span>;</div><div class="line"><span class="keyword">return</span>;</div><div class="line">&#125;</div><div class="line">b();</div></pre></td></tr></table></figure>
+<p>解读： 函数变量声明提升所以 <code>a()</code>方法提升，此时<code>a=10</code>实则是给a函数方法赋值。js变量可以在修改变量值的同时修改值的类型。（ps 弱编程语言就是神奇，随便赋值，函数名居然可以用作变量名）。最后a就取值函数作用域外的值。即<code>a=1</code></p>
+<h3 id="松散型"><a href="#松散型" class="headerlink" title="松散型"></a>松散型</h3><ul>
+<li>变量可以保存任何类型的数据</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o = &#123;</div><div class="line">a:<span class="number">80</span>,</div><div class="line">b:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"><span class="keyword">return</span> <span class="keyword">this</span>.a</div><div class="line">&#125;</div><div class="line">arr: [<span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span>]</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.info(o.b())</div></pre></td></tr></table></figure>
+<p>函数也可以，知道真相的我眼泪快要掉下来。</p>
+<ul>
+<li>可以在修改变量值的同时修改值的类型（不推荐）</li>
+</ul>
+<h3 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h3><ul>
+<li>通过var关键字声明的变量作用域是函数作用域，没有块级作用域。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>  <span class="title">func</span>(<span class="params"></span>)</span>&#123;</div><div class="line"><span class="keyword">if</span>(!<span class="literal">true</span>)&#123;</div><div class="line"><span class="keyword">var</span> a=<span class="number">13</span>;</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line"><span class="built_in">console</span>.log(<span class="string">"----"</span>+a);</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">func()</div><div class="line">:----<span class="literal">undefined</span></div></pre></td></tr></table></figure>
+<p>var <a href="http://www.cnblogs.com/damonlan/archive/2012/07/01/2553425.html" target="_blank" rel="external">变量提升</a>，作用域在函数func中，而不是if{}中。类似的for循环中<code>i</code>用var{}外还可以访问。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// var 变量提升至函数顶部</span></div><div class="line"><span class="keyword">var</span> a;</div><div class="line"><span class="keyword">if</span>(!<span class="literal">true</span>)&#123;</div><div class="line">a=<span class="number">13</span>;</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line"><span class="built_in">console</span>.log(<span class="string">"----"</span>+a);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><a href="https://leanpub.com/understandinges6/read#leanpub-auto-working-with-integers" target="_blank" rel="external">ES6</a>之前没有块级作用域，直到<code>let const</code>出现</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>  <span class="title">func</span>(<span class="params"></span>)</span>&#123;</div><div class="line"><span class="keyword">if</span>(!<span class="literal">true</span>)&#123;</div><div class="line"><span class="keyword">let</span> a=<span class="number">13</span>;</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line"><span class="built_in">console</span>.log(<span class="string">"----"</span>+a);</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">func();</div><div class="line">:---ncaught <span class="built_in">ReferenceError</span>: a is not defined</div></pre></td></tr></table></figure>
+<p><code>let</code>为JS新增了块级作用域，不存在变量提升，不允许重复操作，只在块级中起作用。<br><code>let</code>很方便的解决了没有块级作用域带来的不合理。</p>
+<p>例如：想实现每隔10秒执行一次方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</div><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"><span class="built_in">console</span>.info(<span class="string">"---"</span>+i)</div><div class="line">&#125;,<span class="number">10</span>);</div><div class="line">&#125;</div><div class="line">:--<span class="number">-10</span>(打印<span class="number">10</span>次)</div></pre></td></tr></table></figure>
+<p>i 的作用域在for块级中，setTimeout延时function的执行，但是js代码不会同步等着执行，会继续执行直到i=10，最后一次执行10遍console.info(“—“+i)。</p>
+<p>ES6以前可以这样解决：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">m</span>)</span>&#123;</div><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"><span class="built_in">console</span>.info(<span class="string">"---"</span>+m)</div><div class="line">&#125;,<span class="number">10</span>);</div><div class="line">&#125;)(i)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>i 传入 m，打印m，自然m只在外层function中起作用，m会保存每一个值，独立的。其实就是努力去创建一个独立的工作空间。可惜没有块级作用域这一说，所以才创建个函数作用域。</p>
+<p>但是有了<code>let</code> 后，一切显得顺利成章。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</div><div class="line">setTimeout((<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"><span class="built_in">console</span>.info(<span class="string">"---"</span>+i)</div><div class="line">&#125;)(),<span class="number">10</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>唯一的区别就是var改为let，便可实现效果。</p>
+<p>以上只在考虑变量的因素，let和var及变量作用域。</p>
+<p>想实现每隔10秒的执行一次的效果，还需要理解<a href="http://imweb.io/topic/56ac67fbe39ca21162ae6c78" target="_blank" rel="external">setTimeout</a>,当执行最后一段代码时，会发现tong时间打印10条结果，并没有所谓的10秒一隔。</p>
+<p>设定一个10ms 后执行的定时器并不代表这10ms后立即执行，只是表示10ms后被加入到队列中。加入队列中后并不代表立即执行，只能表示尽快执行。因为队列中并不只是你一个任务。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</div><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"><span class="built_in">console</span>.info(<span class="string">"---"</span>+i)</div><div class="line">&#125;,<span class="number">1000</span>*i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当然这样写准确地说也是大概时间。</p>
+<p>总结：<br>var变量作用域在函数作用域，存在变量提升。let变量作用域在块级作用域，不会变量提升。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/22/WWDC-2017/" rel="next" title="WWDC 2017">
+                <i class="fa fa-chevron-left"></i> WWDC 2017
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/18/2017-09-18-JSCore/" rel="prev" title="iOS与H5交互">
+                iOS与H5交互 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="YGben" />
+          <p class="site-author-name" itemprop="name">YGben</p>
+          <p class="site-description motion-element" itemprop="description">专注精神开荒</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#遇见-js-——解读-变量"><span class="nav-number">1.</span> <span class="nav-text">遇见 js ——解读 变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#松散型"><span class="nav-number">1.0.1.</span> <span class="nav-text">松散型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#块级作用域"><span class="nav-number">1.0.2.</span> <span class="nav-text">块级作用域</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YGben</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

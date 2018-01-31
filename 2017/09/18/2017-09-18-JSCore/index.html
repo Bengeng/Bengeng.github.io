@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS基础," />
+  <meta name="keywords" content="iOS," />
 
 
 
@@ -84,16 +84,20 @@
 
 
 
-<meta name="description" content="Blocks 基本用法时至今日，发现“总结”二字至关重要。Blocks司空见惯，意外参考到 一篇博文,决定分为 Blocks基本用法,Blocks的理解，Blocks的实现 三方面 进行总结。">
+<meta name="description" content="书到用时方恨少，南方的九月依然炎热，着不住家里小亭的凉风。还好快国庆回家了。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Blocks(一)">
-<meta property="og:url" content="http://ben92.com.cn/2017/05/21/Block-一/index.html">
+<meta property="og:title" content="iOS与H5交互">
+<meta property="og:url" content="http://ben92.com.cn/2017/09/18/2017-09-18-JSCore/index.html">
 <meta property="og:site_name" content="YGben">
-<meta property="og:description" content="Blocks 基本用法时至今日，发现“总结”二字至关重要。Blocks司空见惯，意外参考到 一篇博文,决定分为 Blocks基本用法,Blocks的理解，Blocks的实现 三方面 进行总结。">
-<meta property="og:updated_time" content="2017-05-24T07:58:34.000Z">
+<meta property="og:description" content="书到用时方恨少，南方的九月依然炎热，着不住家里小亭的凉风。还好快国庆回家了。">
+<meta property="og:image" content="https://blog-10039692.file.myqcloud.com/1492484475516_5068_1492484475859.png">
+<meta property="og:image" content="https://blog-10039692.file.myqcloud.com/1492486033041_8675_1492486033267.png">
+<meta property="og:image" content="https://blog-10039692.file.myqcloud.com/1492486061808_9327_1492486062018.png">
+<meta property="og:updated_time" content="2017-09-18T10:31:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Blocks(一)">
-<meta name="twitter:description" content="Blocks 基本用法时至今日，发现“总结”二字至关重要。Blocks司空见惯，意外参考到 一篇博文,决定分为 Blocks基本用法,Blocks的理解，Blocks的实现 三方面 进行总结。">
+<meta name="twitter:title" content="iOS与H5交互">
+<meta name="twitter:description" content="书到用时方恨少，南方的九月依然炎热，着不住家里小亭的凉风。还好快国庆回家了。">
+<meta name="twitter:image" content="https://blog-10039692.file.myqcloud.com/1492484475516_5068_1492484475859.png">
 
 
 
@@ -121,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://ben92.com.cn/2017/05/21/Block-一/"/>
+  <link rel="canonical" href="http://ben92.com.cn/2017/09/18/2017-09-18-JSCore/"/>
 
 
 
 
 
-  <title> Blocks(一) | YGben </title>
+  <title> iOS与H5交互 | YGben </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -258,7 +262,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://ben92.com.cn/2017/05/21/Block-一/">
+  <link itemprop="mainEntityOfPage" href="http://ben92.com.cn/2017/09/18/2017-09-18-JSCore/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="YGben">
@@ -282,7 +286,7 @@
             
             
               
-                Blocks(一)
+                iOS与H5交互
               
             
           </h1>
@@ -295,8 +299,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-21T22:13:56+08:00">
-                2017-05-21
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-18T18:14:08+08:00">
+                2017-09-18
               </time>
             
 
@@ -350,25 +354,75 @@
 
       
         <hr>
-<h2 id="Blocks-基本用法"><a href="#Blocks-基本用法" class="headerlink" title="Blocks 基本用法"></a>Blocks 基本用法</h2><p>时至今日，发现“总结”二字至关重要。Blocks司空见惯，意外参考到 <a href="http://fuckingblocksyntax.com/" target="_blank" rel="external">一篇博文</a>,决定分为 Blocks基本用法,Blocks的理解，Blocks的实现 三方面 进行总结。<br><a id="more"></a></p>
-<h3 id="1-用作局部变量"><a href="#1-用作局部变量" class="headerlink" title="1.用作局部变量"></a>1.用作局部变量</h3><p>returnType (^blockName)(parameterTypes) = ^returnType(parameters) {…};<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> (^changeBlock)(<span class="built_in">NSString</span> *) = ^<span class="keyword">void</span>(<span class="built_in">NSString</span> *)&#123;&#125;;</div><div class="line">或者 ^ (<span class="built_in">NSString</span> *)&#123;&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="2-用作属性"><a href="#2-用作属性" class="headerlink" title="2.用作属性"></a>2.用作属性</h3><p>@property (nonatomic, copy, nullability) returnType (^blockName)(parameterTypes);</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="keyword">void</span> (^changeBlock)(<span class="built_in">NSString</span> *);</div></pre></td></tr></table></figure>
-<h3 id="3-用作方法的参数"><a href="#3-用作方法的参数" class="headerlink" title="3.用作方法的参数"></a>3.用作方法的参数</h3><ul>
-<li>(void)someMethodThatTakesABlock:(returnType (^nullability)(parameterTypes))blockName;</li>
-</ul>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)setRedirectResponseBlock:(<span class="keyword">nullable</span> <span class="built_in">NSURLRequest</span> * (^)(<span class="built_in">NSURLConnection</span> *connection, <span class="built_in">NSURLRequest</span> *request, <span class="built_in">NSURLResponse</span> *redirectResponse))block;</div></pre></td></tr></table></figure>
-<h3 id="4-用作调用方法的响应"><a href="#4-用作调用方法的响应" class="headerlink" title="4.用作调用方法的响应"></a>4.用作调用方法的响应</h3><p>[someObject someMethodThatTakesABlock:^returnType (parameters) {…}];</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[ShowBtnColor changeBtnColorWithBlock:^(<span class="built_in">UIColor</span> *color) &#123;</div><div class="line">button.backgroundColor = color;</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
-<h3 id="5-用作-typedef"><a href="#5-用作-typedef" class="headerlink" title="5.用作 typedef"></a>5.用作 typedef</h3><p>typedef returnType (^TypeName)(parameterTypes);<br>TypeName blockName = ^returnType(parameters) {…};<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="built_in">NSString</span> *(^SDWebImageCacheKeyFilterBlock)(<span class="built_in">NSURL</span> *url);</div></pre></td></tr></table></figure></p>
-<h3 id="重点来了。。。"><a href="#重点来了。。。" class="headerlink" title="重点来了。。。"></a>重点来了。。。</h3><p>完整的Blocks的语法是： ^ 返回值类型 参数列表 表达式</p>
-<blockquote>
+<p>书到用时方恨少，南方的九月依然炎热，着不住家里小亭的凉风。还好快国庆回家了。<br><a id="more"></a></p>
 <ul>
-<li>返回值可以不写，因为表达式里如果没有return自然是void类型，有则当有；参数列表在无参数的情况下也可以不写。</li>
-<li>一般会采用typedef简洁Blocks，这样作为 属性 和 方法参数 不显的那样 累赘。</li>
-<li>Block 类型变量可像C语言重的其它类型变量一样使用。用法一中changeBlock就是一个局部变量的Block类型。</li>
+<li>目前开发App有 哪些模式</li>
+<li>运用JavaScriptCore框架</li>
+<li>解析JavaScriptCore框架</li>
 </ul>
+<h3 id="常见的五种App开发模式"><a href="#常见的五种App开发模式" class="headerlink" title="常见的五种App开发模式"></a>常见的五种App开发模式</h3><p>这里小小总结下：</p>
+<ol>
+<li>Native App</li>
+<li>Web App （比如 小程序）</li>
+<li>Hybrid App</li>
+<li>Weex（或Vue）</li>
+<li>React Native </li>
+</ol>
+<p>本篇主要是 <code>Hybrid App</code> iOS中 OC与H5 的交互。</p>
+<h3 id="Hybrid-App"><a href="#Hybrid-App" class="headerlink" title="Hybrid App"></a>Hybrid App</h3><p>混合开发就离不了H5与原生的交互，最近项目需求用到js与原生的交互，只不过我开发的H5部分。</p>
+<p>在这里也总结以下交互的解决方式：（从iOS角度）</p>
+<ol>
+<li>运用 UIWebView  （针对iOS7.0以前）</li>
+<li>运用 <a href="https://developer.apple.com/documentation/webkit/wkwebview#//apple_ref/occ/instm/WKWebView/evaluateJavaScript:completionHandler:" target="_blank" rel="external">WKWebView</a>  （iOS8推出，苹果建议iOS8.0使用）</li>
+<li>运用 <a href="https://developer.apple.com/documentation/javascriptcore" target="_blank" rel="external">JavaScriptCore</a> 框架（iOS7.0后）</li>
+<li>运用第三方优秀框架 （例如  @<a href="https://github.com/marcuswestin" target="_blank" rel="external">Marcus Westin</a>开源库 <a href="https://github.com/marcuswestin/WebViewJavascriptBridge" target="_blank" rel="external">WebViewJavascriptBridge</a>）</li>
+</ol>
+<p>前两者方法利用 UIWebView或者WKWebView 的系统方法调用JS方法，iOS7.0前JS调用OC代码，方法名在URL中，截取URL获取方法名，再调用OC的同名方法。WKWebView可以利用协议方法。具体用到可以谷歌。</p>
+<h3 id="JavaScriptCore"><a href="#JavaScriptCore" class="headerlink" title="JavaScriptCore"></a>JavaScriptCore</h3><p>JavaScriptCore 很好的解决了OC和JS的互相调用，不用依托控制器UIWebView或者WKWebView。<br>对于JavaScriptCore的理解，我更想把她理解为嵌入到OC代码中的JS引擎。或许不对，对于JS还不够深入。我也是看了这篇 <a href="http://web.jobbole.com/84351/" target="_blank" rel="external">一篇给小白看的 JavaScript 引擎指南</a>了解,构成 Webkit 实现基础的 JavaScript 引擎就是 JavaScriptCore。还有一篇介绍 <a href="https://www.zybuluo.com/yangfch3/note/671516" target="_blank" rel="external">JS内核和引擎</a><br><strong>主要类：</strong></p>
+<p><code>JSContext</code>: 提供JS的执行环境，简直就是基石本质。所有JS代码执行都依靠JSContext。<br><img src="https://blog-10039692.file.myqcloud.com/1492484475516_5068_1492484475859.png" alt="来源  @殷源 JavaScriptCore全面解析"></p>
+<p><code>JSValue</code>: 注入JS代码中的变量载体，完美转换原生和JS的变量。变量，除了基本数据类型，可以是自定义类或者方法。JSValue 所有实例来源JSContext。</p>
+<p><code>JSManagedValue</code>: 本质上是一个JSValue，但是可以处理内存管理中的一些特殊情形。</p>
+<p>例子：</p>
+<pre><code class="javascript">JSValue *nickName = [JSValue valueWithObject:name inContext:context];
+JSManagedValue *managedValue = [JSManagedValue managedValueWithValue:nickName  andOwner:self];
+context[@<span class="string">"block"</span>] = ^(){
+NSLog(@<span class="string">"nickName:%@\ncurrentContext:%@"</span>,
+[managedValue value],[JSContext currentContext]);
+};
+[context evaluateScript:@<span class="string">"block()"</span>];
+</code></pre>
+<p>JSValue对象 nickName 持有强引用 context，context中注入block，并调用 JSValue对象和 context，互相持有，所以可能产生 循环引用。</p>
+<p><code>JSExport</code>: 协议，可以将原生对象，方法和属性转为JS的变量，简直就是黑魔法。</p>
+<p><code>JSVirtualMachine</code>: 官方解释此类提供JS执行的工作空间。主要两个用途：支持并发JavaScript执行，并管理JavaScript和Objective-C或Swift之间桥接的对象的内存。<br>这句代码<code>JSContext *context = [[JSContext alloc] init];</code> 使用 context.virtualMachine 就可以输出默认创建的JSVirtualMachine。每一个JavaScript上下文（JSContext对象）都归属于一个虚拟机（JSVirtualMachine）。每个虚拟机可以包含多个不同的上下文，并允许在这些不同的上下文之间传值（JSValue对象），但是不允许两个虚拟机之间传旨，因为垃圾回收站(GC)无法处理虚拟机堆中对象。</p>
+<p><strong>基础使用</strong></p>
+<p>具体的使用就不啰嗦了，很多本文的分享链接都有写到。自己写代码敲一遍基本就了解了。</p>
+<ul>
+<li>(JSValue <em>)evaluateScript:(NSString </em>)script;</li>
+</ul>
+<p>执行JS代码。当然调用js代码也可以这样：</p>
+<p>JSValue <em>function = context[@”printHello”];<br>JSValue </em>result = [function callWithArguments:@[@”YGben”]];  </p>
+<p>含义：取出context的方法printHello；执行并传参数“YGben”</p>
+<ul>
+<li>(void)setObject:(id)object forKeyedSubscript:(NSObject <nscopying> *)key;</nscopying></li>
+</ul>
+<p>给JS中代码变量 key 赋值属性 object</p>
+<blockquote>
+<p>其实JavaScriptCore实现了JS和OC 的互联互通，谁调谁就看业务需求，主要看谁的参数传给谁，谁接受参数处理，如果OC接受参数处理，就是JS调用原生方法。如果JS接受参数处理，就是原生方法调JS。</p>
 </blockquote>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>参考 腾讯 @殷源<a href="https://www.qcloud.com/community/user/571918" target="_blank" rel="external">JavaScriptCore全面解析</a>（下篇）, 总结 JavaScriptCore，大量参考了该文，表示感谢。</p>
+<ol>
+<li>JS调用OC代码两种方式：</li>
+</ol>
+<ul>
+<li>Block直接赋值，调用JS命名的方法实质就在调用Block</li>
+<li>遵循JSExport协议</li>
+</ul>
+<ol>
+<li>内存管理  看懂这两张图</li>
+</ol>
+<p><img src="https://blog-10039692.file.myqcloud.com/1492486033041_8675_1492486033267.png" alt="正常持有"><br><img src="https://blog-10039692.file.myqcloud.com/1492486061808_9327_1492486062018.png" alt="如果我们在native对象中强引用持有JSContext或者JSValue，便会造成循环引用"></p>
+<h3 id="参考传送门"><a href="#参考传送门" class="headerlink" title="参考传送门"></a>参考传送门</h3><p>swift版本<a href="http://nshipster.cn/javascriptcore/" target="_blank" rel="external">JavaScriptCore</a><br>gitbook @HJGitBook  有关 JavaScriptCore 的<a href="https://hjgitbook.gitbooks.io/ios/content/04-technical-research/04-javascriptcore-note.html" target="_blank" rel="external">博文</a><br>简书@ 袁峥 的一篇JavaScriptCore用法 的<a href="http://www.jianshu.com/p/bd7dfd8c9917" target="_blank" rel="external">博文</a><br>@ KittenYang <a href="http://kittenyang.com/webview-javascript-bridge/" target="_blank" rel="external">UIWebView与JS的深度交互
+</a></p>
 
       
     </div>
@@ -392,7 +446,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/iOS基础/" rel="tag"># iOS基础</a>
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
           
         </div>
       
@@ -401,8 +455,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/08/App支付/" rel="next" title="微信和支付宝App支付">
-                <i class="fa fa-chevron-left"></i> 微信和支付宝App支付
+              <a href="/2017/08/17/2017-08-17-js变量/" rel="next" title="js变量">
+                <i class="fa fa-chevron-left"></i> js变量
               </a>
             
           </div>
@@ -411,8 +465,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/23/Block-二/" rel="prev" title="Block(二)">
-                Block(二) <i class="fa fa-chevron-right"></i>
+              <a href="/2017/11/09/2017-11-09-JS-继承/" rel="prev" title="漫谈JS继承">
+                漫谈JS继承 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -533,7 +587,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Blocks-基本用法"><span class="nav-number">1.</span> <span class="nav-text">Blocks 基本用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-用作局部变量"><span class="nav-number">1.1.</span> <span class="nav-text">1.用作局部变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-用作属性"><span class="nav-number">1.2.</span> <span class="nav-text">2.用作属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-用作方法的参数"><span class="nav-number">1.3.</span> <span class="nav-text">3.用作方法的参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-用作调用方法的响应"><span class="nav-number">1.4.</span> <span class="nav-text">4.用作调用方法的响应</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-用作-typedef"><span class="nav-number">1.5.</span> <span class="nav-text">5.用作 typedef</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重点来了。。。"><span class="nav-number">1.6.</span> <span class="nav-text">重点来了。。。</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的五种App开发模式"><span class="nav-number">1.</span> <span class="nav-text">常见的五种App开发模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hybrid-App"><span class="nav-number">2.</span> <span class="nav-text">Hybrid App</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScriptCore"><span class="nav-number">3.</span> <span class="nav-text">JavaScriptCore</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">4.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考传送门"><span class="nav-number">5.</span> <span class="nav-text">参考传送门</span></a></li></ol></div>
             
 
           </div>
