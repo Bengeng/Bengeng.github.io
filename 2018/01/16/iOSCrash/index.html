@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS扩展," />
+  <meta name="keywords" content="iOS," />
 
 
 
@@ -84,19 +84,16 @@
 
 
 
-<meta name="description" content="微信和支付宝是移动开发中常见的第三方支付方式。有必要去了解一下，有必要比较一下。">
+<meta name="description" content="程序猿和BUG就是相爱相杀，而Crash就是终极BUG。自己不把Crash解决，自己就会Crash。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="微信和支付宝App支付">
-<meta property="og:url" content="http://ben92.com.cn/2016/12/08/App支付/index.html">
+<meta property="og:title" content="让我头疼的Crash到底在哪里？(一)">
+<meta property="og:url" content="http://ben92.com.cn/2018/01/16/iOSCrash/index.html">
 <meta property="og:site_name" content="YGben">
-<meta property="og:description" content="微信和支付宝是移动开发中常见的第三方支付方式。有必要去了解一下，有必要比较一下。">
-<meta property="og:image" content="https://pay.weixin.qq.com/wiki/doc/api/img/chapter8_3_1.png">
-<meta property="og:image" content="https://img.alicdn.com/top/i1/LB1n8NYKVXXXXbbXpXXXXXXXXXX">
-<meta property="og:updated_time" content="2017-05-23T12:06:10.000Z">
+<meta property="og:description" content="程序猿和BUG就是相爱相杀，而Crash就是终极BUG。自己不把Crash解决，自己就会Crash。">
+<meta property="og:updated_time" content="2018-01-31T11:45:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="微信和支付宝App支付">
-<meta name="twitter:description" content="微信和支付宝是移动开发中常见的第三方支付方式。有必要去了解一下，有必要比较一下。">
-<meta name="twitter:image" content="https://pay.weixin.qq.com/wiki/doc/api/img/chapter8_3_1.png">
+<meta name="twitter:title" content="让我头疼的Crash到底在哪里？(一)">
+<meta name="twitter:description" content="程序猿和BUG就是相爱相杀，而Crash就是终极BUG。自己不把Crash解决，自己就会Crash。">
 
 
 
@@ -124,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://ben92.com.cn/2016/12/08/App支付/"/>
+  <link rel="canonical" href="http://ben92.com.cn/2018/01/16/iOSCrash/"/>
 
 
 
 
 
-  <title> 微信和支付宝App支付 | YGben </title>
+  <title> 让我头疼的Crash到底在哪里？(一) | YGben </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -241,7 +238,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://ben92.com.cn/2016/12/08/App支付/">
+  <link itemprop="mainEntityOfPage" href="http://ben92.com.cn/2018/01/16/iOSCrash/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="YGben">
@@ -265,7 +262,7 @@
             
             
               
-                微信和支付宝App支付
+                让我头疼的Crash到底在哪里？(一)
               
             
           </h1>
@@ -278,8 +275,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-08T21:10:13+08:00">
-                2016-12-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-16T22:09:49+08:00">
+                2018-01-16
               </time>
             
 
@@ -333,27 +330,49 @@
 
       
         <hr>
-<p>微信和支付宝是移动开发中常见的第三方支付方式。有必要去了解一下，有必要比较一下。<br><a id="more"></a></p>
-<p>——微信</p>
+<p>程序猿和BUG就是相爱相杀，而Crash就是终极BUG。自己不把Crash解决，自己就会Crash。<br><a id="more"></a></p>
+<h3 id="遇到Crash"><a href="#遇到Crash" class="headerlink" title="遇到Crash"></a>遇到Crash</h3><p>每次看到如下这些令人恐惧的东西，我都心中一颤，告诉自己：平常心。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Exception Type:  EXC_CRASH (SIGKILL)</div><div class="line">Exception Type:  EXC_BAD_ACCESS (SIGABRT)</div><div class="line">Exception Type:  EXC_BAD_ACCESS (SIGSEGV)</div><div class="line">Exception Type:  <span class="number">00000020</span></div></pre></td></tr></table></figure>
+<p><em>Exception Type</em>表示异常类型，通常在崩溃日志很常见。</p>
+<p>追根溯源，类似 SIGABRT SIGSEGV 的宏定义，定义在sys/signal.h中，表示发送给程序的不同信号。不管怎么说，就是崩了。</p>
+<p>当我得知这些涉及到LINUX命令的理解时，我想我又差了一大截。<a href="http://zh.cppreference.com/w/c/program/SIG_types" target="_blank" rel="external">参考</a>我了解</p>
+<p>SIGSEGV  非法内存访问<br>SIGABRT 异常终止，absort()引起<br>SIGKILL  程序被杀死</p>
+<p>之后，我才意识到在iOS中有一个类 <strong>NSException</strong> 异常处理的类。原来诸如：</p>
 <blockquote>
-<ul>
-<li>微信的开发文档地址：<a href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_3" target="_blank" rel="external">https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_3</a></li>
-</ul>
+<p>reason: ‘-[ViewController click]: unrecognized selector sent to instance 0x7fe88d4691e0’</p>
 </blockquote>
-<p>首先了解大致的业务流程，以下是微信的交互时序图：</p>
-<p><img src="https://pay.weixin.qq.com/wiki/doc/api/img/chapter8_3_1.png" alt="cmd-markdown-logo"></p>
-<p>——支付宝</p>
+<p>Xcode给我们报的错，就是因为NSException中的<em>NSSetUncaughtExceptionHandler</em>方法。</p>
+<p>而打开NSException类中会发现 <code>NSSetUncaughtExceptionHandler</code> 方法的参数就是一个 <em>NSException</em> 对象。</p>
 <blockquote>
-<ul>
-<li>支付宝的开发文档地址：<a href="https://doc.open.alipay.com/docs/doc.htm?spm=a219a.7629140.0.0.WE73Kv&amp;treeId=204&amp;articleId=105297&amp;docType=1" target="_blank" rel="external">https://doc.open.alipay.com/docs/doc.htm?spm=a219a.7629140.0.0.WE73Kv&amp;treeId=204&amp;articleId=105297&amp;docType=1</a><br> 老版本的：<a href="https://doc.open.alipay.com/doc2/detail?treeId=59&amp;articleId=103563&amp;docType=1" target="_blank" rel="external">https://doc.open.alipay.com/doc2/detail?treeId=59&amp;articleId=103563&amp;docType=1</a></li>
-</ul>
+<p>  @private<br>NSString        <em>name;<br>NSString        </em>reason;<br>NSDictionary    *userInfo;<br>id            reserved;</p>
 </blockquote>
-<p>同样了解大致的业务流程，以下是支付宝的交互时序图：</p>
-<p><img src="https://img.alicdn.com/top/i1/LB1n8NYKVXXXXbbXpXXXXXXXXXX" alt="cmd-markdown-logo"></p>
-<hr>
-<p>——<strong>凡有所学 皆成性格</strong>——</p>
-<p>作者 <a href="http://weibo.com/ghosert" target="_blank" rel="external">ygben</a>  微博<a href="http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference" target="_blank" rel="external">@等风来Ben</a>   </p>
-<p>2016 年 12月 8日    </p>
+<p>私有属性<strong>reson</strong>就是我之前常见的报错内容</p>
+<p>回归到自己的项目中，也发现有这样的异常处理。通常处理如同<a href="http://blog.csdn.net/grozy_sun/article/details/68969541" target="_blank" rel="external">NSSetUncaughtExceptionHandler处理异常
+</a></p>
+<h3 id="天下的Crash有几门派？"><a href="#天下的Crash有几门派？" class="headerlink" title="天下的Crash有几门派？"></a>天下的Crash有几门派？</h3><ul>
+<li><strong>内存问题</strong></li>
+</ul>
+<p><em>BAD_ACCESS</em> 访问的对象已经释放了，或者重复释放同一对象，出现了野指针的现象。出现这种错误比较难发现。</p>
+<p>在内存方面，存在着 <em>野指针</em> <em>僵尸对象</em> <em>内存泄漏</em> 诸多问题都会导致崩溃。参考<a href="https://www.jianshu.com/p/33ee5e7d312c" target="_blank" rel="external">浅谈iOS Crash（二）</a></p>
+<p>处理方式：</p>
+<ol>
+<li>全局断点快速定位代码行</li>
+<li>可以通过Xcode打开 <code>Zombie Objects</code>，也可以使用instruction中的Zombies工具，原理就是僵尸对象来代替已释放对象，根据僵尸对象错误日志定位问题</li>
+<li><a href="https://www.cnblogs.com/xitang/p/4904405.html" target="_blank" rel="external">调试野指针利器 Address sanitizer</a> 也是利用Xcode中 <code>Address sanitizer</code></li>
+<li>重写object的 <code>respondsToSelector</code> 方法，现实出现EXEC_BAD_ACCESS前访问的最后一个object</li>
+</ol>
+<ul>
+<li><strong>多线程问题</strong></li>
+</ul>
+<p>多线程也很容易造成崩溃。之前出现过循环请求导致内存暴增，多线程有时最终也是内存问题。使用多线程参考<a href="https://www.jianshu.com/p/c4bd2960b3fa" target="_blank" rel="external">iOS多线程经典崩溃
+</a></p>
+<blockquote>
+<p>最近一个月结束的项目中使用到了响应式的编程，项目推新的开发中出现了Crash，不知道哪里出现了问题。一方面看懂崩溃日志定位，一方面善于利用Xcode调试工具</p>
+</blockquote>
+<p>最后，追溯源头一部分是自己代码写的有问题。有些问题很容易避免，譬如：<br>使用字面量，若存在nil，抛出异常<br>注册观察者未释放，抛出异常<br>数组越界，抛出异常<br>返回的数据类型不同，抛出异常</p>
+<h3 id="参考阅读"><a href="#参考阅读" class="headerlink" title="参考阅读"></a>参考阅读</h3><p><a href="http://www.qidiandasheng.com/2016/04/10/crash-xuebeng/" target="_blank" rel="external">iOS崩溃crash大解析</a><br><a href="https://nianxi.net/ios/ios-crash-reporter.html" target="_blank" rel="external">漫谈iOS Crash收集框架</a><br><a href="http://dev.qq.com/topic/59141e56ca95d00d727ba750" target="_blank" rel="external">如何定位Obj-C野指针随机Crash(一)：先提高野指针Crash率</a><br><a href="https://dev.qq.com/topic/59142d61ca95d00d727ba752" target="_blank" rel="external">如何定位Obj-C野指针随机Crash(二)：让非必现Crash变成必现
+</a></p>
+<p>感谢分享者</p>
 
       
     </div>
@@ -377,7 +396,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/iOS扩展/" rel="tag"># iOS扩展</a>
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
           
         </div>
       
@@ -386,15 +405,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/12/01/HTTP/" rel="next" title="熟悉又陌生的HTTP协议">
+                <i class="fa fa-chevron-left"></i> 熟悉又陌生的HTTP协议
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/21/Block-一/" rel="prev" title="Blocks(一)">
-                Blocks(一) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -441,8 +460,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -495,6 +523,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#遇到Crash"><span class="nav-number">1.</span> <span class="nav-text">遇到Crash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#天下的Crash有几门派？"><span class="nav-number">2.</span> <span class="nav-text">天下的Crash有几门派？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考阅读"><span class="nav-number">3.</span> <span class="nav-text">参考阅读</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
