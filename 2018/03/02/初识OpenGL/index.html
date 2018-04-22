@@ -90,14 +90,14 @@
 <meta property="og:url" content="http://ben92.com.cn/2018/03/02/初识OpenGL/index.html">
 <meta property="og:site_name" content="YGben">
 <meta property="og:description" content="坐标系有哪些？OpenGL存在6种坐标系 :">
-<meta property="og:image" content="http://ben92.com.cn/../mapdepot/coordinates2.png">
-<meta property="og:image" content="http://ben92.com.cn/../mapdepot/Perspective.png">
-<meta property="og:image" content="http://ben92.com.cn/../mapdepot/Orthographic.png">
-<meta property="og:updated_time" content="2018-04-22T06:41:10.577Z">
+<meta property="og:image" content="http://ben92.com.cn/coordinates2.png">
+<meta property="og:image" content="http://ben92.com.cn/Perspective.png">
+<meta property="og:image" content="http://ben92.com.cn/Orthographic.png">
+<meta property="og:updated_time" content="2018-04-22T10:37:54.164Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenGL | 坐标">
 <meta name="twitter:description" content="坐标系有哪些？OpenGL存在6种坐标系 :">
-<meta name="twitter:image" content="http://ben92.com.cn/../mapdepot/coordinates2.png">
+<meta name="twitter:image" content="http://ben92.com.cn/coordinates2.png">
 
 
 
@@ -166,7 +166,7 @@
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle">不像程序猿的程序猿</p>
+  <p class="site-subtitle">留下的，不只是时间。</p>
 </div>
 
 <div class="site-nav-toggle">
@@ -346,25 +346,26 @@
 <li>Window (or screen) coordinates</li>
 </ol>
 <p>下图就详细的介绍从物体本身坐标到屏幕坐标经历了什么</p>
-<p><img src="../mapdepot/coordinates2.png" alt="图1:coordinates"></p>
-<ol>
-<li><p><strong>模型变化</strong></p>
+<p><img src="coordinates2.png" alt="图1:coordinates"></p>
+<ul>
+<li><strong>模型变化</strong></li>
+</ul>
 <p>每一个模型都存在自己的模型空间中，有自己的模型坐标。如果想把模型（物体）处在空间关系中（例如，桌上上有一个茶壶和一个杯子），就需要转化成一个共同的空间，那么这就来到了世界空间。</p>
-</li>
-<li><p><strong>视图变化</strong></p>
+<ul>
+<li><strong>视图变化</strong></li>
+</ul>
 <p>世界空间到观察空间（相机空间），相当让摄影机在原点居中并观察物体，重新映射了世界空间。</p>
-</li>
-<li><p><strong>投影变化</strong></p>
+<ul>
+<li><strong>投影变化</strong></li>
+</ul>
 <p>从观察空间需要投影到虚拟屏幕上（投影空间/裁剪空间），有两种常用的投影： <strong>正投影</strong>  <strong>透视投影</strong>，可以分别想象视区是长方体和平截头体，参考<em>图2</em> <em>图3</em>，如何计算参考 <a href="http://www.songho.ca/opengl/gl_projectionmatrix.html" target="_blank" rel="external">OpenGL Projection Matrix</a></p>
-</li>
-</ol>
-<p>  <img src="../mapdepot/Perspective.png" alt="Orthographic透视"></p>
-<p><img src="../mapdepot/Orthographic.png" alt="Orthographic正视"></p>
-<ol>
+<p><img src="Perspective.png" alt="Orthographic透视"></p>
+<p><img src="Orthographic.png" alt="Orthographic正视"></p>
+<ul>
 <li><strong>视口变化</strong></li>
-</ol>
+</ul>
 <p>从裁剪坐标到屏幕坐标，裁剪坐标会将投影变化后不在 (-1,1)坐标裁剪，视口变换会将 -1.0～1.0范围的坐标转化到ViewPort函数内。</p>
-<p>参考</p>
+<p>推荐<a href="http://www.codinglabs.net/article_world_view_projection_matrix.aspx" target="_blank" rel="external">文章</a></p>
 
       
     </div>
@@ -462,7 +463,7 @@
                src="/images/avatar.png"
                alt="YGben" />
           <p class="site-author-name" itemprop="name">YGben</p>
-          <p class="site-description motion-element" itemprop="description">专注精神开荒</p>
+          <p class="site-description motion-element" itemprop="description">专注 好奇 耐力</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
